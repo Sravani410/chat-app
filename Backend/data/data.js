@@ -45,4 +45,4 @@ const chats=[
         chatName:"Rahul"
     }
 ]
-module.exports= {chats}
+module.exports= { chats }
