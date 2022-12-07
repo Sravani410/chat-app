@@ -4,7 +4,8 @@ import {Link} from "react-router-dom";
 import Logo from "../assets/logo.svg";
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-
+import axios from "axios"
+import {registerRoute} from "../utils/APIRouter"
 function Register() {
     const [values,setValues]=useState({
        username:"",
@@ -21,10 +22,20 @@ function Register() {
         draggable:true,
         theme:"dark"
     }
-    const handleSubmit=(event)=>{
+    const handleSubmit=async(event)=>{
         event.preventDefault();
-        handleValidation()
-        alert("form")
+        // alert("form")
+       if(handleValidation()){
+         const { username,email,password,confirmPassword }=values;
+          
+         const {data}=await axios.post(registerRoute,{
+            username,
+            email,
+            password
+         });
+         console.log(data)
+       }
+        
     }
     const handleValidation=(e)=>{
         // console.log(e)
@@ -33,19 +44,19 @@ function Register() {
 
         console.log(username,email,password,confirmPassword)
 
-        if(password !== confirmPassword){
+        if(password !== confirmPassword || password===""  || confirmPassword===""){
             console.log("password:",password,"confirmPassword:",confirmPassword)
             // console.log(e)
             // console.log("toast message :",toast)
             toast.error("password and confirm password should be same !",toastOption);
           return false;
         }
-        else if(username.length<3){
+        else if(username.length<3 || username===""){
             // console.log("username:",username.length)
           toast.error("username should not be less than 3 !", toastOption);
           return false
         }
-         else if(password.length<8){
+         else if(password.length<8  || password===""){
             // console.log("username:",username.length)
           toast.error("password should be atleast minimum 8 characters!", toastOption);
           return false
