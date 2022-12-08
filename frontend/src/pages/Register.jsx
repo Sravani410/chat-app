@@ -1,106 +1,112 @@
 import React, { useState } from 'react'
 import styled from "styled-components";
-import {Link} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../assets/logo.svg";
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios"
-import {registerRoute} from "../utils/APIRouter"
+import { registerRoute } from "../utils/APIRouter"
 function Register() {
-    const [values,setValues]=useState({
-       username:"",
-       email:"",
-       password:"",
-       confirmPassword:"",
+    const navigate = useNavigate()
+    const [values, setValues] = useState({
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
     })
 
-    
-    const toastOption={
-        position:"bottom-right",
-        autoClose:8000,
-        pauseOnHover:true,
-        draggable:true,
-        theme:"dark"
+
+    const toastOption = {
+        position: "bottom-right",
+        autoClose: 8000,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark"
     }
-    const handleSubmit=async(event)=>{
+    const handleSubmit = async (event) => {
         event.preventDefault();
         // alert("form")
 
-       if(handleValidation()){
-        console.log(registerRoute)
-         const { username,email,password,confirmPassword }=values;
-          
-         const {data}=await axios.post(registerRoute,{
-            username,
-            email,
-            password,
-            confirmPassword
-         });
-         console.log(data)
-       }
-        
+        if (handleValidation()) {
+            console.log(registerRoute)
+            const { username, email, password } = values;
+
+            const { data } = await axios.post(registerRoute, {
+                username,
+                email,
+                password,
+            });
+            if (data.status === false) {
+                toast.error(data.msg, toastOption);
+            }
+            if (data.status === true) {
+                localStorage.setItem("chat-app-user", JSON.stringify(data.user))
+            }
+            navigate("/login");
+        }
+
     }
-    const handleValidation=(e)=>{
+    const handleValidation = (e) => {
         // console.log(e)
         // alert("as")
-        const { username,email,password,confirmPassword }=values;
+        const { username, email, password, confirmPassword } = values;
 
-        console.log(username,email,password,confirmPassword)
+        console.log(username, email, password, confirmPassword)
 
-        if(password !== confirmPassword || password===""  || confirmPassword===""){
-            console.log("password:",password,"confirmPassword:",confirmPassword)
+        if (password !== confirmPassword || password === "" || confirmPassword === "") {
+            console.log("password:", password, "confirmPassword:", confirmPassword)
             // console.log(e)
             // console.log("toast message :",toast)
-            toast.error("password and confirm password should be same !",toastOption);
-          return false;
+            toast.error("password and confirm password should be same !", toastOption);
+            return false;
         }
-        else if(username.length<3 || username===""){
+        else if (username.length < 3 || username === "") {
             // console.log("username:",username.length)
-          toast.error("username should not be less than 3 !", toastOption);
-          return false
+            toast.error("username should not be less than 3 !", toastOption);
+            return false
         }
-         else if(password.length<8  || password===""){
+        else if (password.length < 8 || password === "") {
             // console.log("username:",username.length)
-          toast.error("password should be atleast minimum 8 characters!", toastOption);
-          return false
+            toast.error("password should be atleast minimum 8 characters!", toastOption);
+            return false
         }
-        else if(email===""){
-            toast.error("email should not be empty",toastOption);
+        else if (email === "") {
+            toast.error("email should not be empty", toastOption);
             return false
         }
         return true;
     }
-    const handleChange=(e)=>{
-       const { name,value }=e.target
+    const handleChange = (e) => {
+        const { name, value } = e.target
         setValues({
-          ...values,
-          [name]:value
+            ...values,
+            [name]: value
         })
     }
-    
 
-  return (
+
+    return (
         <>
-          <FormContainer>
-            <form onSubmit={handleSubmit}>
-                <div className='brand'>
-                    <img src={Logo} alt="Logo" />
-                    <h1>Chat app</h1>
-                </div>
-                    <input  type="text" placeholder='Username' name="username"  className="input" onChange={handleChange}/>
+            <FormContainer>
+                <form onSubmit={handleSubmit}>
+                    <div className='brand'>
+                        <img src={Logo} alt="Logo" />
+                        <h1>Chat app</h1>
+                    </div>
+                    <input type="text" placeholder='Username' name="username" className="input" onChange={handleChange} />
                     <input type="email" placeholder='Email' name="email" className='input' onChange={handleChange} />
                     <input type="password" placeholder='password' name="password" className='input' onChange={handleChange} />
                     <input type="password" placeholder="confirm Password" name="confirmPassword" className='input' onChange={handleChange} />
                     <button type="submit">Create User</button>
                     {/* <input type="submit" value="Submit" /> */}
                     <span>have a already account ? <Link to="/login">Login</Link></span>
-            </form>
-            <ToastContainer></ToastContainer>
-           </FormContainer>
+                </form>
+                <ToastContainer></ToastContainer>
+            </FormContainer>
         </>
-     )
+    )
 }
-const FormContainer=styled.div `
+const FormContainer = styled.div`
    height:100vh;
    width:100vw;
    display:flex;
