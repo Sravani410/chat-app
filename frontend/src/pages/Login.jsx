@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios"
 import { loginRoute } from "../utils/APIRouter"
 
-function Login() {
+const Login=()=> {
   const navigate = useNavigate()
   const [values, setValues] = useState({
     username: "",
@@ -46,9 +46,11 @@ function Login() {
       }
       if (data.status === true) {
         localStorage.setItem("chat-app-user", JSON.stringify(data.user))
+        navigate("/setAvatar");
       }
-      navigate("/");
-    }
+      
+    };
+    alert("");
 
   }
   const handleValidation = (e) => {
@@ -91,11 +93,8 @@ function Login() {
             <h1>Login</h1>
           </div>
           <input type="text" placeholder='Username' name="username" className="input" onChange={handleChange} min="3" />
-          {/* <input type="email" placeholder='Email' name="email" className='input' onChange={handleChange} /> */}
           <input type="password" placeholder='password' name="password" className='input' onChange={handleChange} />
-          {/* <input type="password" placeholder="confirm Password" name="confirmPassword" className='input' onChange={handleChange} /> */}
           <button type="submit">Login</button>
-          {/* <input type="submit" value="Submit" /> */}
           <span>Don't have a account ? <Link to="/register">Register</Link></span>
         </form>
         <ToastContainer></ToastContainer>

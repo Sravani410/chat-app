@@ -24,15 +24,7 @@ export default function SetAvatar() {
     const [selectedAvatar, setSelectedAvatar] = useState(undefined);
 //     console.log('selectedAvatar:', selectedAvatar)
 
-//     useEffect(() => {
-//         const Check = async () => {
-//             if(!localStorage.getItem("Chater-app-userLogin")) {
-//                 navigate("/login");
-//             }
-//         }
-//         Check();
-//     },[])
-   
+
     const toastOption = {
         position: "bottom-right",
         autoClose: 8000,
@@ -41,6 +33,13 @@ export default function SetAvatar() {
         theme: "dark"
     }
 
+        useEffect(() => {
+         if(!localStorage.getItem("chat-app-user")) {
+                navigate("/login");
+            }
+        },[])
+   
+
     const setProfilePicture = async () => {
         if(selectedAvatar === undefined) {
             toast.error("Please Select an avatar", toastOption)
@@ -48,15 +47,16 @@ export default function SetAvatar() {
         else {
             const user = await JSON.parse(localStorage.getItem("chat-app-user"));
             console.log('user:', user)
-            const { data } = await axios.patch(`${setAvatarRoute}/${user._id}`, {
+            const { data } = await axios.post(`${setAvatarRoute}/${user._id}`, {
                 // image : avatars[index];
                 image : avatars[selectedAvatar]
             })
             console.log('data.isSet:', data.isSet)
 
             if(data.isSet) {
-                console.log('user.isAvatarImageSet:', user.isAvatarImageSet)
-
+                console.log("user.avatarImage",user.avatarImage)
+                console.log('user.isAvatarImageSet:', user.isAvatarImageSet);
+          
                 user.isAvatarImageSet = true;
                 user.avatarImage = data.image;
                 localStorage.setItem("chat-app-user", JSON.stringify(user))
