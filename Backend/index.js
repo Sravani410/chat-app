@@ -41,7 +41,7 @@ const io = socket(server, {
 
 //we have to put express as global for online users
 
-global.onllineUsers = new Map();
+global.onlineUsers = new Map();
 
 io.on("connection", (socket) => {
   global.chatSocket = socket;

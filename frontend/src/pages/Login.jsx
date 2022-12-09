@@ -34,7 +34,8 @@ const Login=()=> {
     // alert("form")
 
     if (handleValidation()) {
-      console.log(loginRoute)
+      // console.log(loginRoute)
+      alert("hello")
       const { username, password } = values;
 
       const { data } = await axios.post(loginRoute, {

@@ -83,7 +83,7 @@ console.log("messageatlast:",message)
                 </div>
               <Logout/>
             </div>
-            <div className="chat-message">
+            <div className="chat-messages">
                 {message.map((el)=>{
                     console.log("el:",el)
                     return (
