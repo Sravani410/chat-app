@@ -3,7 +3,7 @@ import styled from "styled-components"
 import Picker from "emoji-picker-react";
 import {IoMdSend} from "react-icons/io"
 import {BsEmojiSmileFill} from "react-icons/bs";
-import {useState,useEffect} from "react";
+import {useState} from "react";
 
 export const ChatInput=({handleSendMsgFn})=>{
     const [showEmojiPicker,setShowEmojipicker]=useState(false);

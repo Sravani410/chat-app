@@ -31,10 +31,10 @@ export default  Contacts=({contacts,currentUser,changeChatFn})=> {
           contacts.map((el,index)=>{
             return (
               <div onClick={()=>{
-                 changeCurrentChat(index,element)
+                 changeCurrentChat(index,el)
               }} key={index} className={`contact ${index===currentSelected ? "selected":""}`}>
                  <div className='avatar'>
-                   <img src={`data:image/svg+xml;base64,${element.avatarImage}`} alt="avatar" />
+                   <img src={`data:image/svg+xml;base64,${el.avatarImage}`} alt="avatar" />
                  </div>
                  <div className='username'>
                      <h3>{element.username}</h3>

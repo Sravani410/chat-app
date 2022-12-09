@@ -53,24 +53,24 @@ const Login=()=> {
     alert("");
 
   }
-  const handleValidation = (e) => {
-    // console.log(e)
-    // alert("as")
+  const handleValidation = () => {
+    
+     alert("as")
     const { username, password } = values;
 
     console.log(username, password)
 
-    if (password === "") {
+    if (password<8) {
       console.log("password:", password,)
       // console.log(e)
       // console.log("toast message :",toast)
-      toast.error("username and password is required", toastOption);
+      toast.error("Password should be greater or equal to 8 character", toastOption);
       return false;
     }
-    else if (username.length === "") {
+    else if (username === "" || password==="") {
       // console.log("username:",username.length)
       toast.error("username and password is required", toastOption);
-      return false
+      return false;
     }
 
     return true;

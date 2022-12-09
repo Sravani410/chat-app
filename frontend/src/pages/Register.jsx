@@ -55,9 +55,9 @@ const  Register=()=> {
         alert("");
 
     }
-    const handleValidation = (e) => {
-        // console.log(e)
-        // alert("as")
+    const handleValidation = () => {
+    
+         alert("as")
         const { username, email, password, confirmPassword } = values;
 
         console.log(username, email, password, confirmPassword)
@@ -69,11 +69,11 @@ const  Register=()=> {
             toast.error("password and confirm password should be same !", toastOption);
             return false;
         }
-        else if (username.length < 3 || username === "") {
-            // console.log("username:",username.length)
-            toast.error("username should not be less than 3 !", toastOption);
-            return false
-        }
+        // else if (username.length < 3 || username === "") {
+        //     // console.log("username:",username.length)
+        //     toast.error("username should not be less than 3 !", toastOption);
+        //     return false
+        // }
         else if (password.length < 8 || password === "") {
             // console.log("username:",username.length)
             toast.error("password should be atleast minimum 8 characters!", toastOption);
