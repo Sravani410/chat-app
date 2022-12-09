@@ -85,7 +85,7 @@ console.log("messageatlast:",message)
             </div>
             <div className="chat-message">
                 {message.map((el)=>{
-                    console.log("element:",el)
+                    console.log("el:",el)
                     return (
                         <div ref={scrollRef} key={uuidv4()}>
                            <div className={`message ${el.fromSelf ? "sended" :"recieved"}`}>
