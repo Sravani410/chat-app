@@ -43,3 +43,5 @@ const getMessage = async (req, res, next) => {
     next(err);
   }
 };
+
+module.exports = { addMessage, getMessage };

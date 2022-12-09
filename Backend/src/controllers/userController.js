@@ -1,5 +1,6 @@
 const User = require("../model/userModel");
 const bcrypt = require("bcrypt");
+const GenerateToken = require("../middlewares/generateToken");
 
 module.exports.register = async (req, res, next) => {
   console.log(req.body);
@@ -25,13 +26,17 @@ module.exports.register = async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     req.body.password = hashedPassword;
     // console.log("body",req.body)
+
+    const token = await GenerateToken(username);
+
     const user = await User.create({
       username: username,
       email: email,
       password: hashedPassword,
+      registerToken: token,
     });
-
-    return res.json({ status: true, user });
+    console.log("users", user);
+    return res.status(201).json({ status: true, user });
   } catch (err) {
     // return res.status(404).json({msg:err.message});
     next(err);

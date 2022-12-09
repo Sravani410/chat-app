@@ -6,7 +6,7 @@ module.exports.login = async (req, res, next) => {
   try {
     const { username, password } = req.body;
     // console.log("sadaadss:", req.body.username);
-    const user = await User.findOne({ username }).lean().exec();
+    const user = await User.findOne({ username: username }).lean().exec();
     if (!user)
       return res.status(404).json({
         msg: "Incorrect username and password",
@@ -16,12 +16,12 @@ module.exports.login = async (req, res, next) => {
     const isPassword = await bcrypt.compare(password, user.password);
     if (!isPassword)
       return res.status(404).json({
-        msg: "Incorrect username and password",
+        message: "Incorrect username and password",
         status: false,
       });
     delete user.password;
 
-    return res.json({ status: true, user });
+    return res.status(201).json({ status: true, user });
   } catch (err) {
     next(err);
   }

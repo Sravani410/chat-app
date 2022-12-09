@@ -3,6 +3,6 @@ const router = express.Router();
 
 const { setAvatar } = require("../controllers/avatarController");
 
-router.post("/:id", setAvatar);
+router.patch("/:id", setAvatar);
 
 module.exports = router;

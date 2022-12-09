@@ -3,7 +3,7 @@ import styled from "styled-components";
 import axios from "axios"
 import { useNavigate } from 'react-router-dom';
 import { allUsersRoute,host } from '../utils/APIRouter';
-import Contacts from '../components/Contacts';
+import {Contacts} from '../components/Contacts';
 import { Welcome } from '../components/Welcome';
 import { ChatContainer} from '../components/ChatContainer';
 import {io} from "socket.io-client";
@@ -57,9 +57,9 @@ export const Chat=()=> {
       <div className='container'>
          <Contacts contacts={contacts} currentUser={currentUser} changeChatFn={handleCurrentChat}/>
          {
-          isLoading && currentChat === undefined ? (
+          isLoading && currentUser === undefined ? (
             <Welcome currentUser={currentUser}/>
-          ):(<ChatContainer currentUser={currentUser} currentChat={currentChat} socket={socket}/>)
+          ):(<ChatContainer currentUser={currentUser} currentChat={currentUser} socket={socket}/>)
          }
       </div>
      </Container>

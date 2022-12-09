@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react';
 import styled from "styled-components"
 import Logo from "../assets/logo.svg"
 // here we pass props from chat.jsx in contact
-export default  Contacts=({contacts,currentUser,changeChatFn})=> {
+export const Contacts=({contacts,currentUser,changeChatFn})=> {
   const [currentUserName,setCurrentUserName]=useState(undefined)
   const [currentUserImage,setCurrentUserImage]=useState(undefined)
   const [currentSelected,setCurrentSelected]=useState(undefined);
@@ -37,7 +37,7 @@ export default  Contacts=({contacts,currentUser,changeChatFn})=> {
                    <img src={`data:image/svg+xml;base64,${el.avatarImage}`} alt="avatar" />
                  </div>
                  <div className='username'>
-                     <h3>{element.username}</h3>
+                     <h3>{el.username}</h3>
                  </div>
               </div>
             )
