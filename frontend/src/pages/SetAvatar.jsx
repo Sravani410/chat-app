@@ -24,6 +24,11 @@ export default function SetAvatar() {
     const [selectedAvatar, setSelectedAvatar] = useState(undefined);
 //     console.log('selectedAvatar:', selectedAvatar)
 
+      useEffect(() => {
+         if(!localStorage.getItem("chat-app-user")) {
+                navigate("/login");
+            }
+        },[])
 
     const toastOption = {
         position: "bottom-right",
@@ -33,11 +38,7 @@ export default function SetAvatar() {
         theme: "dark"
     }
 
-        useEffect(() => {
-         if(!localStorage.getItem("chat-app-user")) {
-                navigate("/login");
-            }
-        },[])
+      
    
 
     const setProfilePicture = async () => {
@@ -47,7 +48,7 @@ export default function SetAvatar() {
         else {
             const user = await JSON.parse(localStorage.getItem("chat-app-user"));
             console.log('user:', user)
-            const { data } = await axios.post(`${setAvatarRoute}/${user._id}`, {
+            const { data } = await axios.patch(`${setAvatarRoute}/${user._id}`, {
                 // image : avatars[index];
                 image : avatars[selectedAvatar]
             })
@@ -80,10 +81,13 @@ export default function SetAvatar() {
 
             const image = await axios.get(`${api}/${Math.round(Math.random()*1000)}`)
             console.log('image:', image)
+
             const buffer = new Buffer(image.data);
             console.log('buffer:', buffer)
+
             data.push(buffer.toString("base64"));
             console.log('data:', data)
+
         }
         setAvatars(data);
         setIsLoading(false);

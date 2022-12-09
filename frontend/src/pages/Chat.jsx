@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react'
 import styled from "styled-components";
 import axios from "axios"
 import { useNavigate } from 'react-router-dom';
-import { allUsersRoute } from '../utils/APIRouter';
+import { allUsersRoute,host } from '../utils/APIRouter';
 import Contacts from '../components/Contacts';
 
 function Chat() {
@@ -29,11 +29,19 @@ function Chat() {
   }
   },[currentUser])
   return (
-    <Container>
+    <>
+     <Container>
       <div className='container'>
-         <Contacts contacts={contacts} currentUser={currentUser}/>
+         <Contacts contacts={contacts} currentUser={currentUser} changeChatFn={handleCurrentChat}/>
+         {
+          isLoaded && currentChat === undefined ? (
+            <Welcome currentUser={currentUser}/>
+          )
+         }
       </div>
-    </Container>
+     </Container>
+    </>
+   
   )
 }
 
