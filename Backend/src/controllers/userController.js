@@ -7,7 +7,7 @@ module.exports.register = async (req, res, next) => {
   try {
     const { username, email, password } = req.body;
     // console.log("sadaadss:",req.body.username)
-    const usernameCheck = await User.findOne({ username: username });
+    const usernameCheck = await User.findOne({ username: username }).lean().exec();
     console.log(usernameCheck);
 
     if (usernameCheck) {

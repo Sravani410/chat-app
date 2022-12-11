@@ -27,6 +27,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
+  registerToken: {
+    type: String,
+  },
+  loginToken: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("Users", userSchema);
