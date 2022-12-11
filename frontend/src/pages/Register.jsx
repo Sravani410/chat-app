@@ -8,7 +8,7 @@ import axios from "axios"
 import { registerRoute } from "../utils/APIRouter"
 
 const  Register=()=> {
-    const navigate = useNavigate()
+    
     const [values, setValues] = useState({
         username: "",
         email: "",
@@ -24,18 +24,19 @@ const  Register=()=> {
         draggable: true,
         theme: "dark"
     }
-    useEffect(()=>{
-        if(localStorage.getItem("chat-app-user")){
-            navigate("/login")
-        }
-    },[])
+    const navigate = useNavigate()
+    // useEffect(()=>{
+    //     if(localStorage.getItem("chat-app-user")){
+    //         navigate("/login")
+    //     }
+    // },[])
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         // alert("form")
 
         if (handleValidation()) {
-            console.log(registerRoute)
+            // console.log(registerRoute)
             const { username, email, password } = values;
 
             const { data } = await axios.post(registerRoute, {
@@ -44,7 +45,7 @@ const  Register=()=> {
                 password,
             });
             if (data.status === false) {
-                toast.error(data.msg, toastOption);
+                toast.error(data.message, toastOption);
             }
             if (data.status === true) {
                 localStorage.setItem("chat-app-user", JSON.stringify(data.user))
@@ -57,7 +58,7 @@ const  Register=()=> {
     }
     const handleValidation = () => {
     
-         alert("as")
+         //alert("as")
         const { username, email, password, confirmPassword } = values;
 
         console.log(username, email, password, confirmPassword)

@@ -25,9 +25,13 @@ export default function SetAvatar() {
 //     console.log('selectedAvatar:', selectedAvatar)
 
       useEffect(() => {
-         if(!localStorage.getItem("chat-app-user")) {
+        const Check=async()=>{
+  if(!localStorage.getItem("chat-app-user")) {
                 navigate("/login");
             }
+        }
+        Check();
+       
         },[])
 
     const toastOption = {

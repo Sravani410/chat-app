@@ -8,7 +8,7 @@ import axios from "axios"
 import { loginRoute } from "../utils/APIRouter"
 
 const Login=()=> {
-  const navigate = useNavigate()
+
   const [values, setValues] = useState({
     username: "",
     password: "",
@@ -22,6 +22,7 @@ const Login=()=> {
     draggable: true,
     theme: "dark"
   }
+  const navigate = useNavigate()
 
   useEffect(()=>{
     if(localStorage.getItem('chat-app-user')){
@@ -32,8 +33,8 @@ const Login=()=> {
   const handleSubmit = async (event) => {
     event.preventDefault();
     // alert("form")
-
-    if (handleValidation()) {
+   try{
+   if (handleValidation()) {
       // console.log(loginRoute)
       alert("hello")
       const { username, password } = values;
@@ -42,27 +43,38 @@ const Login=()=> {
         username,
         password,
       });
+      console.log("data:",data)
       if (data.status === false) {
-        toast.error(data.msg, toastOption);
+        toast.error(data.message, toastOption);
+        alert("please do register")
+        navigate("/register")
       }
       if (data.status === true) {
         localStorage.setItem("chat-app-user", JSON.stringify(data.user))
         navigate("/setAvatar");
       }
       
-    };
-    alert("");
+   }
+    else{
+       alert("please fill the username and password");
+    }
+    }
+    catch(err){
+      console.log("err.message:",err.message)
+    }
+
+   
 
   }
   const handleValidation = () => {
     
-     alert("as")
+     alert("handle validation")
     const { username, password } = values;
 
     console.log(username, password)
 
     if (password<8) {
-      console.log("password:", password,)
+      // console.log("password:", password,)
       // console.log(e)
       // console.log("toast message :",toast)
       toast.error("Password should be greater or equal to 8 character", toastOption);
@@ -93,7 +105,7 @@ const Login=()=> {
             <img src={Logo} alt="Logo" />
             <h1>Login</h1>
           </div>
-          <input type="text" placeholder='Username' name="username" className="input" onChange={handleChange} min="3" />
+          <input type="text" placeholder='Username' name="username" className="input" onChange={handleChange} />
           <input type="password" placeholder='password' name="password" className='input' onChange={handleChange} />
           <button type="submit">Login</button>
           <span>Don't have a account ? <Link to="/register">Register</Link></span>
