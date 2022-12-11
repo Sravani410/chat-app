@@ -38,7 +38,7 @@ const getMessage = async (req, res, next) => {
         message: el.message.text,
       };
     });
-    return req.status(200).json(projectedMessage);
+    return res.status(200).json(projectedMessage);
   } catch (err) {
     next(err);
   }
