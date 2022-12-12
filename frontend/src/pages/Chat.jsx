@@ -75,25 +75,31 @@ export const Chat=()=> {
   )
 }
 
-const Container=styled.div`
-     height:100vh;
-     width:100vw;
-     display:flex;
-     flex-direction:column;
-     justify-content:center;
-     gap:1rem;
-     align-items:center;
-     gap:1rem;
-     align-items:center;
-     background-color:grey ;
-     .container{
-      height:85vh;
-      width:85vw;
-      background-color:black;
-      display:grid;
-      grid-template-columns:25% 75%
-      @media screen and (min-width:720px) and (max-width:1080px)
-         grid-template-columns:35% 65%;
+const Container = styled.div`
+    /* border: 1px solid; */
+    height: 100vh;
+    width: 100vw;
 
-     }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+    background-color: #050527;
+    .container {
+        /* border: 1px solid white; */
+        height: 85vh;
+        width: 85vw;
+        
+        background-color: #55535376;
+        display: grid;
+        grid-template-columns: 25% 75%;
+        @media screen and (min-width : 720px) and (max-width : 1080px) {
+            grid-template-columns: 35% 65%;
+        }
+        @media screen and (min-width : 160px) and (max-width : 720px) {
+            /* border: 1px solid yellow ; */
+            grid-template-columns: 98%;
+        }
+    }
 `

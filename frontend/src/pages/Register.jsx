@@ -25,11 +25,11 @@ const  Register=()=> {
         theme: "dark"
     }
     const navigate = useNavigate()
-    // useEffect(()=>{
-    //     if(localStorage.getItem("chat-app-user")){
-    //         navigate("/login")
-    //     }
-    // },[])
+    useEffect(()=>{
+        if(localStorage.getItem("chat-app-user")){
+            navigate("/login")
+        }
+    },[])
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -45,7 +45,7 @@ const  Register=()=> {
                 password,
             });
             if (data.status === false) {
-                toast.error(data.message, toastOption);
+                toast.error(data.msg, toastOption);
             }
             if (data.status === true) {
                 localStorage.setItem("chat-app-user", JSON.stringify(data.user))

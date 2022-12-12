@@ -45,7 +45,7 @@ const Login=()=> {
       });
       console.log("data:",data)
       if (data.status === false) {
-        toast.error(data.message, toastOption);
+        toast.error(data.msg, toastOption);
         alert("please do register")
         navigate("/register")
       }
