@@ -1,7 +1,9 @@
 import React,{useState,useEffect} from 'react';
 import styled from "styled-components"
 import Logo from "../assets/logo.svg"
+
 // here we pass props from chat.jsx in contact
+
 export const Contacts=({contacts,currentUser,changeChatFn})=> {
   const [currentUserName,setCurrentUserName]=useState(undefined)
   const [currentUserImage,setCurrentUserImage]=useState(undefined)

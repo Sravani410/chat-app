@@ -10,7 +10,7 @@ import {io} from "socket.io-client";
 
 
 export const Chat=()=> {
-  const navigate=useNavigate();
+ 
   const [contacts,setContacts]=useState([]);
   const [currentUser,setCurrentUser]=useState(undefined);
   const [isLoading,setIsLoading]=useState(false);
@@ -18,7 +18,7 @@ export const Chat=()=> {
   const socket=useRef();
   console.log("currentUser:",currentUser)
 
-
+  const navigate=useNavigate();
   useEffect(()=>{
     const check=async()=>{
     if(!localStorage.getItem("chat-app-user")){
